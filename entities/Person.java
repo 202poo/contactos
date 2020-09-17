@@ -4,6 +4,16 @@ public class Person {
     String name;
     String sex;
 
+    public Person() {
+    }
+    public Person(String name) {
+        this.name=name;
+    }
+    public Person(String name, String sex) {
+        this.name=name;
+        this.sex=sex;
+    }
+
     public void laugh() {
         System.out.println( name + " jejeje!");
     }
@@ -25,4 +35,7 @@ public class Person {
     }
     
 
+    
+
+    
 }
