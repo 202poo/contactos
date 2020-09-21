@@ -17,7 +17,6 @@ public class Person {
     public void laugh() {
         System.out.println( name + " jejeje!");
     }
-
     public String getName() {
         return name;
     }
