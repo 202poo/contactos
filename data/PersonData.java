@@ -6,29 +6,33 @@ import entities.Person;
 
 public class PersonData {
     List<Person> lis= new ArrayList<Person>();
-
+    int id=0;
     public void create(Person p) {
-        //ToDo
-        System.out.println("Create");
+        p.setId(++id);
         lis.add(p);
     }
     public List<Person> list(String filter) {
-        System.out.println(lis);
-        //ToDo
-        System.out.println("list jejejejejjej");
         return lis;
     }
     public Person get(int id) {
-        Person d= new Person();
-        //ToDo
-        System.out.println("get");
-        return d;
+        int index=0;
+        for (Person d : lis) {
+            if (d.getId() == id ) {
+                return lis.get(index);
+            }
+            index++;
+        }
+        return null;
     }
     // update(Person, int): void
-    // delete(int): void
-    
-
-
-
+    public void delete(int id) {
+        for (Person d : lis) {
+            if (id == d.getId()) {
+                lis.remove(d);
+                System.out.println("Eliminado " + d.getName());
+            }
+        }
+    }
+   
 
 }

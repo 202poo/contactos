@@ -6,15 +6,8 @@ import entities.Person;
 public class Main {
 
     public static void main(String[] args) {
-        PersonData data= new PersonData();
-        data.create(new Person("Juan"));
-        data.create(new Person("Juan2"));
-        data.list("");
-        
+        PersonData data = new PersonData();
         Scanner input = new Scanner(System.in);
-        // System.out.print("Ingrese nombre:");
-        // String name= input.nextLine();
-        // System.out.println("Escribiste: "+name);
         int opt = 0;
         do {
             System.out.println("***** CRUD PERSON *****");
@@ -28,21 +21,18 @@ public class Main {
             input.nextLine(); // Limpiar el buffer
             switch (opt) {
                 case 1:
-                    System.out.println("Opcion 1 elejida");
-                    
-                    Person p = new Person();
-                    System.out.print("Ingrese nombre:");
-                    p.setName(input.nextLine());
-                    System.out.print("Ingrese sexo:");
-                    p.setSex(input.nextLine());
-
-                    System.out.println("name= " + p.getName() +" \t sex= " + p.getSex() );
-                    p.laugh();
-
+                    System.out.println("Listado de personas ");
+                    for (Person d : data.list("")) {
+                        System.out.println(d.getId() + "\t" + d.getName());
+                    }
                     break;
                 case 2:
-                    System.out.println("Opcion 2 elejida");
+                    System.out.println("Nueva persona ");
+                    Person p= new Person();
+                    System.out.print("name: ");
+                    p.setName(input.nextLine());
 
+                    data.create(p);
                     break;
 
                 default:
