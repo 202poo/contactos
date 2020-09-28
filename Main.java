@@ -34,6 +34,11 @@ public class Main {
 
                     data.create(p);
                     break;
+                case 3:
+                    System.out.println("Eliminar persona ");                    
+                    System.out.print("id: ");
+                    data.delete(input.nextInt());
+                    break;
 
                 default:
                     System.out.println("Opcion no valida");
