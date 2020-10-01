@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import data.PersonData;
@@ -25,7 +26,8 @@ public class Main {
                 case 1:
                     System.out.println("Listado de personas ");
                     for (Person d : data.list("")) {
-                        System.out.println(d.getId() + "\t" + d.getName());
+                        System.out.println(d.getId() + "\t" + d.getName()
+                        + "\t" + d.getSex()+ "\t" + d.getAge());
                     }
                     break;
                 case 2:
@@ -33,8 +35,18 @@ public class Main {
                     Person p = new Person();
                     System.out.print("name: ");
                     p.setName(input.nextLine());
+                    System.out.print("sex: ");
+                    p.setSex(input.nextLine());
 
-                    data.create(p);
+                    System.out.print("edad: ");
+                    try {
+                        p.setAge(input.nextInt());
+                        data.create(p);
+                    } catch (Exception e) {
+                        input.nextLine(); // Limpiar el buffer
+                        System.out.print("Edad debe ser entero, no se guardo");
+                    }
+                    
                     break;
                 case 3:
                     System.out.println("Eliminar persona ");
@@ -54,13 +66,14 @@ public class Main {
                     Person per = data.get(input.nextInt());
                     if (per != null) {
                         System.out.println("Name current: " + per.getName());
+                        System.out.println("Sex current: "+per.getSex());
+
                         input.nextLine(); // Limpiar el buffer
                         System.out.print("new name: ");
                         per.setName(input.nextLine());
-
-                        // System.out.println("Sex current: "+per.getSex());
-                        // System.out.print("new sex: ");
-                        // per.setSex(input.nextLine());
+                        
+                        System.out.print("new sex: ");
+                        per.setSex(input.nextLine());
                         data.update(per);
                     } else {
                         System.out.println("NO encontrado");

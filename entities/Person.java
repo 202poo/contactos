@@ -4,6 +4,8 @@ public class Person {
     int id;
     String name;
     String sex;
+    int age;
+
 
     public Person() {
     }
@@ -19,7 +21,14 @@ public class Person {
         System.out.println( name + " jejeje!");
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -36,18 +45,14 @@ public class Person {
         this.sex = sex;
     }
 
-    public int getId() {
-        return id;
+    public int getAge() {
+        return age;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public void createxxxx(Person p) {
-        //p.setId(++id);
-        // "ingrese nombre:" 
-        //lis.add(p);
-    }
+    
     
 }
