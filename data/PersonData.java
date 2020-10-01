@@ -30,20 +30,20 @@ public class PersonData {
 
     // update(Person, int): void (o update(Person): void)
     public void update(Person p) {
-        int index=0;
-        boolean b=false;
-        for (Person d: lis) {
+        int index = 0;
+        // boolean b=false;
+        for (Person d : lis) {
             if (d.getId() == p.getId()) {
-                //d = p;
+                // d = p;
                 lis.set(index, p);
-                b=true;
+                // b=true;
             }
             index++;
         }
-        if (b)
-            System.out.println("encontrado");
-        else
-            System.out.println("NO encontrado");
+        // if (b)
+        // System.out.println("encontrado");
+        // else
+        // System.out.println("NO encontrado");
 
     }
 
