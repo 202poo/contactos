@@ -14,6 +14,8 @@ public class Main {
             System.out.println("1 List ");
             System.out.println("2 New ");
             System.out.println("3 Delete ");
+            System.out.println("4 Get byID ");
+            System.out.println("5 Update ");
             System.out.println("0 Exit ");
             System.out.println("Choice option: ");
             opt = input.nextInt();
@@ -38,6 +40,25 @@ public class Main {
                     System.out.println("Eliminar persona ");                    
                     System.out.print("id: ");
                     data.delete(input.nextInt());
+                    break;
+                case 4:
+                    System.out.println("get persona ");                    
+                    System.out.print("id: ");
+                    Person d = data.get(input.nextInt());
+                    System.out.println("Id: "+d.getId());
+                    System.out.println("Name: "+d.getName());
+                    break;
+                case 5:
+                    System.out.println("update persona ");                    
+                    System.out.print("id: ");
+                    Person per = data.get(input.nextInt());                    
+                    System.out.println("Name current: "+per.getName());
+                    input.nextLine(); // Limpiar el buffer
+                    System.out.print("new name: ");
+                    per.setName(input.nextLine());
+
+                    data.update(per);
+
                     break;
 
                 default:

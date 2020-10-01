@@ -43,5 +43,11 @@ public class Person {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void createxxxx(Person p) {
+        //p.setId(++id);
+        // "ingrese nombre:" 
+        //lis.add(p);
+    }
     
 }
