@@ -5,12 +5,25 @@ import data.Conn;
 import data.PersonData;
 import entities.Person;
 
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 public class Main {
 
     public static void main(String[] args) {
+       
+        String sql = "SELECT * FROM persons ";
+        try {
+            Statement st = Conn.connectSQLite().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println(rs.getString("name"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
 
-        Conn.connectSQLite();
-
+        /*
         PersonData data = new PersonData();
         Scanner input = new Scanner(System.in);
         int opt = 0;
@@ -118,6 +131,6 @@ public class Main {
                 default:
                     System.out.println("Opcion no valida");
             }
-        } while (opt != 0);
+        } while (opt != 0);*/
     }
 }
