@@ -10,6 +10,7 @@ public class Main {
         PersonData data = new PersonData();
         Scanner input = new Scanner(System.in);
         int opt = 0;
+        
         do {
             System.out.println("***** CRUD PERSON *****");
             System.out.println("1 List ");
@@ -26,8 +27,7 @@ public class Main {
                 case 1:
                     System.out.println("Listado de personas ");
                     for (Person d : data.list("")) {
-                        System.out.println(d.getId() + "\t" + d.getName()
-                        + "\t" + d.getSex()+ "\t" + d.getAge());
+                        System.out.println(d.getId() + "\t" + d.getName() + "\t" + d.getSex() + "\t" + d.getAge());
                     }
                     break;
                 case 2:
@@ -46,7 +46,7 @@ public class Main {
                         input.nextLine(); // Limpiar el buffer
                         System.out.print("Edad debe ser entero, no se guardo");
                     }
-                    
+
                     break;
                 case 3:
                     System.out.println("Eliminar persona ");
@@ -54,27 +54,57 @@ public class Main {
                     data.delete(input.nextInt());
                     break;
                 case 4:
-                    System.out.println("get persona ");
-                    System.out.print("id: ");
-                    Person d = data.get(input.nextInt());
-                    System.out.println("Id: " + d.getId());
-                    System.out.println("Name: " + d.getName());
+                    int b4 = 1;
+                    do {
+                        System.out.println("get persona ");
+                        System.out.print("id: ");
+                        int id = 0;
+                        try {
+                            b4 = 0;
+                            id = input.nextInt();
+                            Person d = data.get(id);
+                            if (d != null) {
+                                System.out.println("Id: " + d.getId());
+                                System.out.println("Name: " + d.getName());
+                            } else {
+                                System.out.print("la person no existe");
+                            }
+                        } catch (Exception e) {
+                            input.nextLine(); // Limpiar el buffer
+                            System.out.print("id no valido, debe ser un numero");
+                            b4 = 1;
+                        }
+
+                    } while (b4 != 0);
+
                     break;
                 case 5:
                     System.out.println("update persona ");
                     System.out.print("id: ");
+
                     Person per = data.get(input.nextInt());
+
                     if (per != null) {
                         System.out.println("Name current: " + per.getName());
-                        System.out.println("Sex current: "+per.getSex());
+                        System.out.println("Sex current: " + per.getSex());
 
                         input.nextLine(); // Limpiar el buffer
                         System.out.print("new name: ");
                         per.setName(input.nextLine());
-                        
+
                         System.out.print("new sex: ");
                         per.setSex(input.nextLine());
-                        data.update(per);
+
+                        System.out.print("edad: ");
+                        try {
+                            per.setAge(input.nextInt());
+                            data.update(per);
+                        } catch (Exception e) {
+                            // per.setAge(0);
+                            input.nextLine(); // Limpiar el buffer
+                            System.out.print("Edad debe ser entero, no se guardo");
+                        }
+
                     } else {
                         System.out.println("NO encontrado");
                     }
