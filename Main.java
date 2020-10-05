@@ -1,12 +1,16 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import data.Conn;
 import data.PersonData;
 import entities.Person;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Conn.connectSQLite();
+
         PersonData data = new PersonData();
         Scanner input = new Scanner(System.in);
         int opt = 0;
