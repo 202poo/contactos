@@ -29,7 +29,7 @@ public class PersonData {
             System.out.println("create.res=" + res);
 
         } catch (Exception e) {
-            System.out.println("Error" + e);
+            System.out.println("Error " + e);
         }
     }
 
@@ -48,7 +48,7 @@ public class PersonData {
                 lis2.add(p);                
             }
         } catch (Exception e) {
-            System.out.println("Error" + e);
+            System.out.println("Error " + e);
         }
         return lis2;
     }
@@ -66,7 +66,7 @@ public class PersonData {
                 p.setAge(rs.getInt("age"));               
             }
         } catch (Exception e) {
-            System.out.println("Error" + e);
+            System.out.println("Error " + e);
         }
         return p;
     }
@@ -90,17 +90,21 @@ public class PersonData {
             System.out.println("update.res=" + res);
 
         } catch (Exception e) {
-            System.out.println("Error" + e);
+            System.out.println("Error " + e);
         }
-
     }
 
     public void delete(int id) {
-        for (Person d : lis) {
-            if (id == d.getId()) {
-                lis.remove(d);
-                // System.out.println("Eliminado " + d.getName());
-            }
+        String sql = "DELETE FROM persons WHERE id = ?";
+        int res =0;
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setInt(1, id );
+            res = ps.executeUpdate();// 0 no o 1 si commit
+            System.out.println("delete.res=" + res);
+
+        } catch (Exception e) {
+            System.out.println("Error " + e);
         }
     }
 
