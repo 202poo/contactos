@@ -1,5 +1,7 @@
 package data;
 
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Person;
@@ -14,7 +16,23 @@ public class PersonData {
     }
 
     public List<Person> list(String filter) {
-        return lis;
+        List<Person> lis2 = new ArrayList<Person>();
+        String sql = "SELECT * FROM persons ";
+        try {
+            Statement st = Conn.connectSQLite().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Person p = new Person();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setSex(rs.getString("sex"));
+                p.setAge(rs.getInt("age"));
+                lis2.add(p);                
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
+        return lis2;
     }
 
     public Person get(int id) {
