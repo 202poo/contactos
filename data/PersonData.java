@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import entities.Person;
 public class PersonData {
     List<Person> lis = new ArrayList<Person>();
     int id = 0;
+    Connection cn = Conn.connectSQLite();
 
     public void create(Person d) {
         //p.setId(++id);
@@ -19,7 +21,7 @@ public class PersonData {
         int i = 0;
         int res =0;
         try {
-            PreparedStatement ps = Conn.connectSQLite().prepareStatement(sql);
+            PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(++i, d.getName());
             ps.setString(++i, d.getSex());
             ps.setInt(++i, d.getAge());
@@ -35,7 +37,7 @@ public class PersonData {
         List<Person> lis2 = new ArrayList<Person>();
         String sql = "SELECT * FROM persons ";
         try {
-            Statement st = Conn.connectSQLite().createStatement();
+            Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Person p = new Person();
@@ -55,7 +57,7 @@ public class PersonData {
         Person p =new Person();
         String sql = "SELECT * FROM persons WHERE id = "+id+" ";
         try {
-            Statement st = Conn.connectSQLite().createStatement();
+            Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 p.setId(rs.getInt("id"));
@@ -79,7 +81,7 @@ public class PersonData {
         int i = 0;
         int res =0;
         try {
-            PreparedStatement ps = Conn.connectSQLite().prepareStatement(sql);
+            PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(++i, d.getName());
             ps.setString(++i, d.getSex());
             ps.setInt(++i, d.getAge());
