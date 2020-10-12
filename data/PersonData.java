@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,9 +11,24 @@ public class PersonData {
     List<Person> lis = new ArrayList<Person>();
     int id = 0;
 
-    public void create(Person p) {
-        p.setId(++id);
-        lis.add(p);
+    public void create(Person d) {
+        //p.setId(++id);
+        //lis.add(p);
+        String sql = "INSERT INTO persons(name, sex, age) "
+                + " VALUES(?,?,?) ";
+        int i = 0;
+        int res =0;
+        try {
+            PreparedStatement ps = Conn.connectSQLite().prepareStatement(sql);
+            ps.setString(++i, d.getName());
+            ps.setString(++i, d.getSex());
+            ps.setInt(++i, d.getAge());
+            res = ps.executeUpdate();// 0 no o 1 si commit
+            System.out.println("create.res=" + res);
+
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
     }
 
     public List<Person> list(String filter) {
