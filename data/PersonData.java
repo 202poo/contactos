@@ -70,21 +70,26 @@ public class PersonData {
     }
 
     // update(Person, int): void (o update(Person): void)
-    public void update(Person p) {
-        int index = 0;
-        // boolean b=false;
-        for (Person d : lis) {
-            if (d.getId() == p.getId()) {
-                // d = p;
-                lis.set(index, p);
-                // b=true;
-            }
-            index++;
+    public void update(Person d) {
+        String sql = "UPDATE persons SET "
+                + "name=?, "
+                + "sex=?, "
+                + "age=? "
+                + "WHERE id=?";
+        int i = 0;
+        int res =0;
+        try {
+            PreparedStatement ps = Conn.connectSQLite().prepareStatement(sql);
+            ps.setString(++i, d.getName());
+            ps.setString(++i, d.getSex());
+            ps.setInt(++i, d.getAge());
+            ps.setInt(++i, d.getId());
+            res = ps.executeUpdate();// 0 no o 1 si commit
+            System.out.println("update.res=" + res);
+
+        } catch (Exception e) {
+            System.out.println("Error" + e);
         }
-        // if (b)
-        // System.out.println("encontrado");
-        // else
-        // System.out.println("NO encontrado");
 
     }
 
