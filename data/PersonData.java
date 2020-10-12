@@ -52,14 +52,21 @@ public class PersonData {
     }
 
     public Person get(int id) {
-        int index = 0;
-        for (Person d : lis) {
-            if (d.getId() == id) {
-                return lis.get(index);
+        Person p =new Person();
+        String sql = "SELECT * FROM persons WHERE id = "+id+" ";
+        try {
+            Statement st = Conn.connectSQLite().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setSex(rs.getString("sex"));
+                p.setAge(rs.getInt("age"));               
             }
-            index++;
+        } catch (Exception e) {
+            System.out.println("Error" + e);
         }
-        return null;
+        return p;
     }
 
     // update(Person, int): void (o update(Person): void)
